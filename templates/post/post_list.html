@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %} All Posts {% endblock %}
+
+
+
+{% block javascript %}
+
+  <script>
+    $("#id_content").change(function () {
+      console.log( $(this).val() );
+    });
+  </script>
+  
+{% endblock %}
+
+
+
+{% block content %}
+
+<form method="post" action="{% url 'post_create' %}">
+	{% csrf_token %}
+	{{ post.as_p }}
+	<input type="submit" value="Post"></input>
+</form>
+
+
+{% for p in posts %}
+<hr>
+<h1>{{p.content}}</h1>
+<p>{{p.created_date}}</p>
+<p>{{p.author}}</p>
+
+<form method="post" action="{% url 'comment_create' p.id %}">
+	{% csrf_token %}
+	{{ com.as_p }}
+	<input type="submit" value="Comment"></input>
+</form>
+
+<h2>Comments:</h2>
+
+
+{% for comment in p.comments.all %}
+	<hr>
+
+	<h3>{{ comment.body }} </h3>
+	<span>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;{{ comment.author }} on {{ comment.created_date }}</span>
+	<hr>
+{% endfor %}
+
+
+
+<hr>
+{% endfor %}
+
+
+
+{% endblock %}
+
