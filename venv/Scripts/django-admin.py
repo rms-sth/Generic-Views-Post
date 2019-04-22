@@ -1,4 +1,4 @@
-#!e:\facebook\venv\scripts\python.exe
+#!f:\facebook\generic-views-post\venv\scripts\python.exe
 from django.core import management
 
 if __name__ == "__main__":
