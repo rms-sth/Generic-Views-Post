@@ -1,12 +1,14 @@
 from django.urls import path
 from .views import *
 
-
+app_name = 'post'
 urlpatterns = [
-
-path('', PostListView.as_view(), name='post_list'),
-path('create/', PostCreateView.as_view(), name='post_create'),
-# path('view/', CommmentListView.as_view(), name='view_comment'),
-path('<int:pk>/comment/', CommentCreateView.as_view(), name='comment_create'),
+	# CLIENT URL PATTERNS
+    # CLIENT URL PATTERNS
+    # CLIENT URL PATTERNS
+    # CLIENT URL PATTERNS
+path('', ClientPostListView.as_view(), name='clientpostlist'),
+path('create/', ClientPostCreateView.as_view(), name='clientpostcreate'),
+path('<int:pk>/comment/', ClientCommentCreateView.as_view(), name='clientcommentcreate'),
 
 ]
