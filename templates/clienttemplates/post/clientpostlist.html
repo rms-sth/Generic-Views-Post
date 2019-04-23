@@ -4,13 +4,18 @@
 
 {% block content %}
 
+    <div >
+        <h2 id="abc" style="color:blue; "></h2>
+    </div>
+
+
 <form id="new_post" method="post">
 	{% csrf_token %}
 	{{ post.as_p }}
 	<input type="submit" value="Post"></input>
 </form>
 
-<div id="abc"></div>
+
 
 {% for p in posts %}
 <hr>
@@ -85,7 +90,6 @@
     		dataType: 'json',
     		success: function(data){
                 document.getElementById('abc').innerHTML = data['message']
-    			// alert('successfull')
     		}
     	})
     	})	
