@@ -2,14 +2,9 @@
 
 {% block title %} All Posts {% endblock %}
 
-
-
-
-
-
 {% block content %}
 
-<form id="new_post" method="post" >
+<form id="new_post" method="post">
 	{% csrf_token %}
 	{{ post.as_p }}
 	<input type="submit" value="Post"></input>
@@ -17,33 +12,33 @@
 
 <div id="abc"></div>
 
-<!-- {% for p in posts %}
+{% for p in posts %}
 <hr>
 <p>{{p.author}} on {{p.created_date}}</p>
-<h1>{{p.content}}</h1> -->
+<h1>{{p.content}}</h1>
 
 
-<!-- <form method="post" action="{% url 'post:clientcommentcreate' p.id %}">
+<form method="post" action="{% url 'post:clientcommentcreate' p.id %}">
 	{% csrf_token %}
 	{{ com.as_p }}
 	<input type="submit" value="Comment"></input>
 </form>
- -->
-<!-- <h2>Comments:</h2>
+
+<h2>Comments:</h2>
 
 
 {% for comment in p.comments.all %}
-	<hr>
-	<span>[{{ comment.author }} on {{ comment.created_date }}]</span>
-	<h3>{{ comment.body }} </h3>
-	
-	<hr>
+<hr>
+<span>[{{ comment.author }} on {{ comment.created_date }}]</span>
+<h3>{{ comment.body }} </h3>
+
+<hr>
 {% endfor %}
 
 
 
 <hr>
-{% endfor %} -->
+{% endfor %}
 
 
 
@@ -57,36 +52,48 @@
 
 
 {% block javascript %}
-  <script>
+
+
+
+
+
+
+
+<script>
     $(document).ready(function(){
     	var $myform = $("#new_post")
-    	var $content = $('#id_content').val()
     	$myform.submit(function(event){
     		event.preventDefault();
-    		// console.log(event)
     		var $formData = $(this).serialize();
-    		alert('$input[name=csrfmiddlewaretoken]')
+
+            // console.log(event)
+    		// alert($('input[name=csrfmiddlewaretoken]').val())
     		// document.getElementById("abc").innerHTML = $formData
+            // alert($("#new_post")[0].innerHTML)
+            // console.log($formData)
+
     		// $('#abc').html('<h1>'$formdata'</h1>')
 
+
+
     		$.ajax({
-    		type:'POST',
-    		url:'/create/',
-    		data:{
-    			'content': $content,
-    			'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-    		},
+              method: 'POST',
+              url: '/create/',
+              data: $formData,
+    			// 'content': $('#id_content').val(),
+    			// 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
     		dataType: 'json',
     		success: function(data){
-    			alert('successfull')
+                document.getElementById('abc').innerHTML = data['message']
+    			// alert('successfull')
     		}
     	})
-    	})
-    	
-    	
-    	
-    	
+    	})	
     });
 
-  </script>
+</script>
+
+
+
+
 {% endblock %}
