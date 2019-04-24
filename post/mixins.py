@@ -17,7 +17,7 @@ class AjaxableResponseMixin(object):
         if self.request.is_ajax():
             print(form.cleaned_data)
             data = {
-                'message': "Successfully posted your post. Refresh to view"
+                'message': self.message
             }
             return JsonResponse(data)
         else:

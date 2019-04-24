@@ -15,12 +15,17 @@
 	<input type="submit" value="Post"></input>
 </form>
 
+   <div >
+        <h2 id="dat" style="color:blue; "></h2>
+    </div>
 
-
+<div id="thisdiv">
 {% for p in posts %}
 <hr>
 <p>{{p.author}} on {{p.created_date}}</p>
 <h1>{{p.content}}</h1>
+</div>
+
 
 
 <form method="post" action="{% url 'post:clientcommentcreate' p.id %}">
@@ -82,19 +87,38 @@
 
 
     		$.ajax({
-              method: 'POST',
-              url: '/create/',
-              data: $formData,
+                method: 'POST',
+                url: '/create/',
+                data: $formData,
     			// 'content': $('#id_content').val(),
     			// 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-    		dataType: 'json',
-    		success: function(data){
-                document.getElementById('abc').innerHTML = data['message']
-    		}
-    	})
+        		dataType: 'json',
+        		success: function(data){
+                    document.getElementById('abc').innerHTML = data['message']
+                    // document.getElementById('dat').innerHTML = $('#id_content').val()
+                    $('#thisdiv').load(document.URL + ' #thisdiv');
+                    // document.getElementById('dat').innerHTML = $('#id_content').val()
+        		}
+        	})
+            // $.ajax({
+            //     url: 'post/detail/2',
+            //     method: 'GET',
+            //     data: {},
+            //     success: function(data){
+            //         $('#stream-list').replaceWith($('#stream-list',data));
+            //     },
+            //     error: function(error){
+            //         console.log(error);
+            //         console.log("error");
+            //     }
+            // });
     	})	
     });
+var total_seconds = 5; // refresh every 5 seconds
 
+setInterval(function(){
+    refreshStream();
+},total_second * 1000);
 </script>
 
 

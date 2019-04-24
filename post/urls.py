@@ -10,5 +10,6 @@ urlpatterns = [
 path('', ClientPostListView.as_view(), name='clientpostlist'),
 path('create/', ClientPostCreateView.as_view(), name='clientpostcreate'),
 path('<int:pk>/comment/', ClientCommentCreateView.as_view(), name='clientcommentcreate'),
+path('post/detail/<int:pk>', PostDetailView.as_view(), name='clientpostdetail'),
 
 ]

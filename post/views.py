@@ -63,11 +63,23 @@ class ClientCommentCreateView(CreateView):
         # post_id = self.kwargs['pk']
         return reverse('post:clientpostlist')
 
-
+ 
 #Ajax Posting
 class ClientPostCreateView(AjaxableResponseMixin, CreateView):
     template_name = 'clienttemplates/post/clientpostlist.html'
     form_class = ClientPostForm
     success_url = 'clientpostlist'
+    message = "Congratulation!!! Your post is online"
 
+
+
+
+class PostDetailView(AjaxableResponseMixin, DetailView):
+    template_name = 'clienttemplates/post/clientpostlist.html'
+    model = Post
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['form'] = ClientPostForm
+    #     return context
 

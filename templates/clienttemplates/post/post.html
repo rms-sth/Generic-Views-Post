@@ -1,0 +1,9 @@
+{% block content %}
+<div id="thisdiv">
+{% for p in posts %}
+<hr>
+<p>{{p.author}} on {{p.created_date}}</p>
+<h1>{{p.content}}</h1>
+</div>
+{% endfor %}
+{% endblock %}
